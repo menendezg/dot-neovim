@@ -9,7 +9,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'davidhalter/jedi-vim'
 Plug 'chiel92/vim-autoformat'
 Plug 'Yggdroot/indentLine'
-Plug 'python/black'
+"Plug 'python/black'
+Plug 'ambv/black'
 Plug 'nvie/vim-flake8'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'w0rp/ale'
@@ -43,6 +44,16 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'morhetz/gruvbox'
+Plug 'phanviet/vim-monokai-pro'
+Plug 'Rigellute/shades-of-purple.vim'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'machakann/vim-highlightedyank'
+Plug 'chriskempson/base16-vim'
+Plug 'ayu-theme/ayu-vim'
+Plug 'junegunn/seoul256.vim'
+Plug 'gosukiwi/vim-atom-dark'
+Plug 'joshdick/onedark.vim'
 call plug#end()
 
 " Turn off backup
@@ -65,7 +76,7 @@ set expandtab
 let g:neomake_python_enabled_makers = ['flake8']
 
 " disable autocompletion, cause we use deoplete for completion
-let g:jedi#completions_enabled = 0
+"let g:jedi#completions_enabled = 0
 
 " open the go-to function in split, not another buffer
 let g:jedi#use_splits_not_buffers = "right"
@@ -74,31 +85,48 @@ noremap <F3> :Autoformat<CR>
 let g:autoformat_autoindent = 0
 let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
-set textwidth=79
-set colorcolumn=80
-
+set textwidth=88
+set colorcolumn=88
 set background=dark
 let g:one_allow_italics = 1 " I love italic for comments
-colorscheme one
-let g:airline_theme='one'
-
-"color dracula
-"colorscheme molokai
-
-"" set true colors 
-if (has("nvim"))
-  For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
+"colorscheme onehalfdark
+"let g:airline_theme='onehalfdark'
+"let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let g:material_theme_style = 'darker'
+"wq:colorscheme monokai
+colorscheme onedark
+set termguicolors
+"let ayucolor="mirage"
+"colorscheme ayu
+"colorscheme gruvbox
+"" aset true colors 
+"if (has("nvim"))
+"For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+"endif
 
 "" For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
 "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-if (has("termguicolors"))
-  set termguicolors
-endif
+"if (has("termguicolors"))
+"set termguicolors
+"endif
 
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 
 
 vmap <C-c> "+y
+set cursorline
+"highlight Cursorline cterm=bold gui=none
+highlight Cursorline term=bold cterm=underline
+"set termguico
+"
+"
+"" jedi
+let g:jedi#goto_command = "gc"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = "gf"
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<leader>r"
+let g:jedi#use_splits_not_buffers = "right"

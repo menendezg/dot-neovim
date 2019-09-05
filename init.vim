@@ -1,14 +1,35 @@
+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+"                                                                              "
+"                       __   _ _ _ __ ___  _ __ ___                            "
+"                       \ \ / / | '_ ` _ \| '__/ __|                           "
+"                        \ V /| | | | | | | | | (__                            "
+"                         \_/ |_|_| |_| |_|_|  \___|                           "
+"                                                                              "
+"                                                                              "
+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"                              
+"                            MENENDEZ GABRIEL                                  "                        
+"                      CONFIGURATION FILE FOR NVIM                             "
+"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+
+
+
+
 call plug#begin('~/.local/share/nvim/plugged')
+
+"-------------------=== Code/Project navigation ===-------------
+Plug 'scrooloose/nerdtree'
+Plug 'Yggdroot/indentLine'
+Plug 'kien/ctrlp.vim'
+Plug 'majutsushi/tagbar'
+Plug 'scrooloose/nerdcommenter'
 
 Plug 'davidhalter/jedi-vim'
 Plug 'crusoexia/vim-monokai'
 Plug 'zchee/deoplete-jedi'
 Plug 'vim-airline/vim-airline'
-Plug 'scrooloose/nerdtree'
 Plug 'jiangmiao/auto-pairs'
 Plug 'davidhalter/jedi-vim'
 Plug 'chiel92/vim-autoformat'
-Plug 'Yggdroot/indentLine'
 "Plug 'python/black'
 Plug 'ambv/black'
 Plug 'nvie/vim-flake8'
@@ -54,6 +75,19 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'junegunn/seoul256.vim'
 Plug 'gosukiwi/vim-atom-dark'
 Plug 'joshdick/onedark.vim'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'lifepillar/vim-solarized8'
+"highlight
+Plug 'sheerun/vim-polyglot'
+" syntax check
+Plug 'w0rp/ale'
+
+
+
+
+
+"test plugins 
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 call plug#end()
 
 " Turn off backup
@@ -62,16 +96,20 @@ set noswapfile
 set nowritebackup
 
 syntax on
-"set termguicolors
+set termguicolors
 set nu
+set ruler
+
+
 
 filetype plugin indent on
-" show existing tab with 4 spaces width
 set tabstop=4
-" when indenting with '>', use 4 spaces width
 set shiftwidth=4
-" On pressing tab, insert 4 spaces
 set expandtab
+set autoindent
+set cursorline
+set showmatch
+set enc=utf-8
 :set mouse=a
 let g:neomake_python_enabled_makers = ['flake8']
 
@@ -87,15 +125,16 @@ let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
 set textwidth=88
 set colorcolumn=88
-set background=dark
 let g:one_allow_italics = 1 " I love italic for comments
 "colorscheme onehalfdark
 "let g:airline_theme='onehalfdark'
 "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:material_theme_style = 'darker'
 "wq:colorscheme monokai
-colorscheme onedark
-set termguicolors
+"colorscheme onedark
+"set t_Co=256
+"set background=dark
+"set termguicolors
 "let ayucolor="mirage"
 "colorscheme ayu
 "colorscheme gruvbox
@@ -121,7 +160,8 @@ highlight Cursorline term=bold cterm=underline
 "set termguico
 "
 "
-"" jedi
+"
+" jedi
 let g:jedi#goto_command = "gc"
 let g:jedi#goto_assignments_command = "<leader>g"
 let g:jedi#goto_definitions_command = "gf"
@@ -130,3 +170,38 @@ let g:jedi#usages_command = "<leader>n"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>r"
 let g:jedi#use_splits_not_buffers = "right"
+
+let g:PaperColor_Theme_Options = {
+  \   'language': {
+  \     'python': {
+  \       'highlight_builtins': 1,
+  \       'highlight_builtin_objs': 1,
+  \       'highlight_builtin_types': 1,
+  \       'highlight_builtin_funcs': 1,
+  \       'highlight_all': 1,
+  \     },
+  \     'cpp': {
+  \       'highlight_standard_library': 1
+  \     },
+  \     'c': {
+  \       'highlight_builtins' : 1
+  \     }
+  \   }
+  \ }
+set background=dark
+colorscheme PaperColor
+"let base16colorspace=256
+"=====================================================
+"" NERDTree settings
+"=====================================================
+let NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__$']     " Ignore files in NERDTree
+let NERDTreeWinSize=40
+autocmd VimEnter * if !argc() | NERDTree | endif  " Load NERDTree only if vim is run without arguments
+nmap " :NERDTreeToggle<CR>
+
+let g:pymode_virtualenv=1
+
+"syntax match pythonFunction /\v([^[:cntrl:][:space:][:punct:][:digit:]]|_)([^[:cntrl:][:punct:][:space:]]|_)*\ze(\s?\()/
+let g:python_highlight_all = 1
+filetype plugin on
+au BufReadPost,BufNewFile *.py syntax match pythonFunction /\v([^[:cntrl:][:space:][:punct:][:digit:]]|_)([^[:cntrl:][:punct:][:space:]]|_)*\ze(\s?\()/

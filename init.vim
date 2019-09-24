@@ -22,7 +22,8 @@ Plug 'Yggdroot/indentLine'
 Plug 'kien/ctrlp.vim'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdcommenter'
-
+Plug 'stsewd/isort.nvim', { 'do': ':UpdateRemotePlugins' }
+"----------------------------------------------------------------
 Plug 'davidhalter/jedi-vim'
 Plug 'crusoexia/vim-monokai'
 Plug 'zchee/deoplete-jedi'
@@ -39,7 +40,7 @@ Plug 'othree/html5.vim'
 Plug 'kaicataldo/material.vim'
 Plug 'phanviet/vim-monokai-pro'
 Plug 'tomasr/molokai'
-Plug 'rakr/vim-one'
+Plug 'fisadev/vim-isort'
 """"""""""""""""""""""""""""""""""""""""
 Plug 'posva/vim-vue'
 Plug 'othree/html5.vim'
@@ -76,18 +77,22 @@ Plug 'junegunn/seoul256.vim'
 Plug 'gosukiwi/vim-atom-dark'
 Plug 'joshdick/onedark.vim'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'trusktr/seti.vim'
 Plug 'lifepillar/vim-solarized8'
 "highlight
 Plug 'sheerun/vim-polyglot'
 " syntax check
 Plug 'w0rp/ale'
 
+" JS SUPPORT
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
 
+""TEST PLUGIN"
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
-
-
-"test plugins 
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 call plug#end()
 
 " Turn off backup
@@ -101,7 +106,6 @@ set nu
 set ruler
 
 
-
 filetype plugin indent on
 set tabstop=4
 set shiftwidth=4
@@ -111,6 +115,28 @@ set cursorline
 set showmatch
 set enc=utf-8
 :set mouse=a
+
+
+if has("nvim")
+    let g:python3_host_prog = $HOME . "/.pyenv/shims/python3.7"
+endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 let g:neomake_python_enabled_makers = ['flake8']
 
 " disable autocompletion, cause we use deoplete for completion
@@ -154,11 +180,11 @@ let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 
 
 vmap <C-c> "+y
-set cursorline
 "highlight Cursorline cterm=bold gui=none
-highlight Cursorline term=bold cterm=underline
+"highlight Cursorline gui=underline term=bold cterm=underline
 "set termguico
-"
+
+
 "
 "
 " jedi
@@ -189,8 +215,9 @@ let g:PaperColor_Theme_Options = {
   \   }
   \ }
 set background=dark
+"colorscheme Dracula
+"colorscheme palenight
 colorscheme PaperColor
-"let base16colorspace=256
 "=====================================================
 "" NERDTree settings
 "=====================================================
@@ -204,4 +231,31 @@ let g:pymode_virtualenv=1
 "syntax match pythonFunction /\v([^[:cntrl:][:space:][:punct:][:digit:]]|_)([^[:cntrl:][:punct:][:space:]]|_)*\ze(\s?\()/
 let g:python_highlight_all = 1
 filetype plugin on
+
 au BufReadPost,BufNewFile *.py syntax match pythonFunction /\v([^[:cntrl:][:space:][:punct:][:digit:]]|_)([^[:cntrl:][:punct:][:space:]]|_)*\ze(\s?\()/
+
+"" Run always when a python file is write
+autocmd BufWritePost *.py call flake8#Flake8()
+
+
+
+:set cursorline
+:hi clear CursorLine
+:hi CursorLine gui=bold
+highlight Cursorline cterm=bold gui=bold term=bold guibg=Grey30
+
+
+"=====================================================================================
+if (has("nvim"))
+  "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+
+"For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+"Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+" < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+if (has("termguicolors"))
+  set termguicolors
+endif
+
+

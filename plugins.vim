@@ -115,5 +115,10 @@ Plug 'vim-airline/vim-airline-themes'
 " Icons
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+
+
+"MISC PLUGGINS 
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 call plug#end()
 

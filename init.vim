@@ -313,20 +313,6 @@ let g:airline#extensions#hunks#enabled=0
 
 
 
-" ==== Markdown configurations==============" 
-" set to 1, nvim will open the preview window after entering the markdown buffer
-" default: 0
-let g:mkdp_auto_start = 1
-
-" set to 1, the nvim will auto close current preview window when change
-" from markdown buffer to another buffer
-" default: 1
-let g:mkdp_auto_close = 1
-
-
-
-
-
 
 
 
@@ -353,11 +339,6 @@ highlight Cursorline cterm=bold gui=bold term=bold guibg=Grey30
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 " Enable line numbers
 set number
-
-" Reload icons after init source
-if exists('g:loaded_webdevicons')
-  call webdevicons#refresh()
-endif
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 "Enable prettier
@@ -365,6 +346,14 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 noremap <leader>f :Prettier<CR> "set keys to executte command
 
 
+autocmd FileType python let b:coc_root_patterns = ['.git', '.env']
+
 "black congiration map and execute when allways save file
 noremap <leader>p :Black<CR> "set keys to executte command
 autocmd BufWritePre *.py execute ':Black'
+
+" Reload icons after init source
+if exists('g:loaded_webdevicons')
+  call webdevicons#refresh()
+endif
+

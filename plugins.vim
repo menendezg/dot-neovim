@@ -83,7 +83,24 @@ Plug 'mattn/emmet-vim'
 
 
 "" Magical Inteliisense. in test of replace ncm2
-Plug 'neoclide/coc.nvim', {'branch': 'release'} 
+" Intellisense Engine
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+" Improved motion in Vim
+Plug 'easymotion/vim-easymotion'
+" Tmux/Neovim movement integration
+Plug 'christoomey/vim-tmux-navigator'
+
+" Snippet support
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+
+" Print function signatures in echo area
+Plug 'Shougo/echodoc.vim'
+
+" Improved syntax highlighting and indentation
+Plug 'othree/yajs.vim'
+
+
 
 "Plug 'ncm2/ncm2'
 
@@ -115,10 +132,5 @@ Plug 'vim-airline/vim-airline-themes'
 " Icons
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-
-
-
-"MISC PLUGGINS 
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 call plug#end()
 

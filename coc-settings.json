@@ -19,5 +19,7 @@
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
   "diagnostic.infoSign": "•",
-  "python.jediEnabled": false
+  "python.jediEnabled": false,
+  "suggest.floatEnable": true,
+  "coc.preferences.hoverTarget": "float"
 }

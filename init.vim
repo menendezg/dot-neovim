@@ -314,6 +314,34 @@ let g:airline#extensions#hunks#enabled=0
 
 
 
+" ==== Markdown configurations==============" 
+" set to 1, nvim will open the preview window after entering the markdown buffer
+" default: 0
+let g:mkdp_auto_start = 1
+
+" set to 1, the nvim will auto close current preview window when change
+" from markdown buffer to another buffer
+" default: 1
+let g:mkdp_auto_close = 1
+
+
+
+
+" coc.nvim color changes
+hi! link CocErrorSign WarningMsg
+hi! link CocWarningSign Number
+hi! link CocInfoSign Type
+
+" === coc.nvim === "
+nmap <silent> <leader>dd <Plug>(coc-definition)
+nmap <silent> <leader>dr <Plug>(coc-references)
+nmap <silent> <leader>dj <Plug>(coc-implementation)
+
+" FINAL COC CONFIS
+
+
+
+
 
 
 
@@ -352,6 +380,8 @@ autocmd FileType python let b:coc_root_patterns = ['.git', '.env']
 noremap <leader>p :Black<CR> "set keys to executte command
 autocmd BufWritePre *.py execute ':Black'
 
+
+"========================================================================
 " Reload icons after init source
 if exists('g:loaded_webdevicons')
   call webdevicons#refresh()

@@ -355,8 +355,11 @@ let g:deoplete#enable_at_startup = 1
 
 " UI SETTINGS
 set termguicolors
+colorscheme one
 set background=dark
-colorscheme OceanicNext
+
+"set background=dark
+"colorscheme OceanicNext
 :set cursorline
 :hi clear CursorLine
 :hi CursorLine gui=bold

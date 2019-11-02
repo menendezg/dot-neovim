@@ -390,3 +390,5 @@ if exists('g:loaded_webdevicons')
   call webdevicons#refresh()
 endif
 
+" enable the magic of tabs line in neovim
+let g:airline#extensions#tabline#enabled = 1

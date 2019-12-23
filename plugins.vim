@@ -29,13 +29,12 @@ Plug 'w0rp/ale'
 Plug 'othree/html5.vim'
 Plug 'kaicataldo/material.vim'
 Plug 'phanviet/vim-monokai-pro'
-Plug 'tomasr/molokai'
 Plug 'fisadev/vim-isort'
 """"""""""""""""""""""""""""""""""""""""
 Plug 'posva/vim-vue'
 Plug 'othree/html5.vim'
 Plug 'mattn/emmet-vim'
-" Plug 'ap/vim-css-color'
+Plug 'ap/vim-css-color'
 Plug 'digitaltoad/vim-pug'
 Plug 'wavded/vim-stylus'
 Plug 'elzr/vim-json'
@@ -52,6 +51,14 @@ Plug 'pangloss/vim-javascript'
 " Autocomplete
 "Plug 'ncm2/ncm2'
 "Plug 'roxma/nvim-yarp'
+
+
+" enable ncm2 for all buffers
+"autocmd BufEnter * call ncm2#enable_for_buffer()
+" IMPORTANT: :help Ncm2PopupOpen for more information
+"set completeopt=noinsert,menuone,noselect
+
+
 "Plug 'ncm2/ncm2-bufword'
 "Plug 'ncm2/ncm2-path'
 "Plug 'ncm2/ncm2-jedi'
@@ -83,7 +90,6 @@ Plug 'mattn/emmet-vim'
 
 
 "" Magical Inteliisense. in test of replace ncm2
-" Intellisense Engine
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 " Improved motion in Vim
 Plug 'easymotion/vim-easymotion'
@@ -100,14 +106,9 @@ Plug 'Shougo/echodoc.vim'
 " Improved syntax highlighting and indentation
 Plug 'othree/yajs.vim'
 
-
-
-"Plug 'ncm2/ncm2'
-
 Plug 'roxma/nvim-yarp'
 
 "" enable ncm2 for all buffers
-"autocmd BufEnter * call ncm2#enable_for_buffer()
 "" IMPORTANT: :help Ncm2PopupOpen for more information
 "set completeopt=noinsert,menuone,noselect
 "" NOTE: you need to install completion sources to get completions. Check
@@ -132,6 +133,29 @@ Plug 'vim-airline/vim-airline-themes'
 " Icons
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+
+
+"MISC PLUGGINS 
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+
+
+"THEME
+Plug 'liuchengxu/space-vim-dark'
+Plug 'flrnprz/plastic.vim'
+Plug 'joshdick/onedark.vim'
+Plug 'haishanh/night-owl.vim'
+Plug 'ayu-theme/ayu-vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'morhetz/gruvbox'
+Plug 'cocopon/iceberg.vim'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'rakr/vim-one'
+Plug 'doums/darcula'
+Plug 'arcticicestudio/nord-vim'
+Plug 'sjl/badwolf'
+Plug 'luochen1990/rainbow'
+Plug 'junegunn/rainbow_parentheses.vim'
 call plug#end()
+
 

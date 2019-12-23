@@ -19,7 +19,8 @@
   "diagnostic.errorSign": "•",
   "diagnostic.warningSign": "•",
   "diagnostic.infoSign": "•",
-  "python.jediEnabled": false,
+  "python.jediEnabled":false,
+  "python.autoComplete.addBrackets": true,
   "suggest.floatEnable": true,
   "coc.preferences.hoverTarget": "float"
 }

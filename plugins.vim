@@ -3,7 +3,6 @@
 " ============================================================================ "
 call plug#begin('~/.local/share/nvim/plugged')
 
-
 "-------------------=== Code/Project navigation ===-------------
 Plug 'scrooloose/nerdtree'
 Plug 'Yggdroot/indentLine'
@@ -13,16 +12,17 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'stsewd/isort.nvim', { 'do': ':UpdateRemotePlugins' }
 
 "----------------------------------------------------------------
-Plug 'davidhalter/jedi-vim'
+"Plug 'davidhalter/jedi-vim'
 Plug 'crusoexia/vim-monokai'
-Plug 'zchee/deoplete-jedi'
+"Plug 'zchee/deoplete-jedi'
+
 Plug 'jiangmiao/auto-pairs'
-Plug 'davidhalter/jedi-vim'
 Plug 'chiel92/vim-autoformat'
 
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'psf/black', { 'branch': 'stable' }
 "Plug 'python/black' "Disable atm
-
-Plug 'ambv/black'
+"Plug 'ambv/black'
 Plug 'nvie/vim-flake8'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'w0rp/ale'
@@ -43,26 +43,6 @@ Plug 'elzr/vim-json'
 Plug 'moll/vim-node'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'pangloss/vim-javascript'
-
-
-"This autocomplete right now are disable because im testing the new */
-"plugin like Inteliisense
-
-" Autocomplete
-"Plug 'ncm2/ncm2'
-"Plug 'roxma/nvim-yarp'
-
-
-" enable ncm2 for all buffers
-"autocmd BufEnter * call ncm2#enable_for_buffer()
-" IMPORTANT: :help Ncm2PopupOpen for more information
-"set completeopt=noinsert,menuone,noselect
-
-
-"Plug 'ncm2/ncm2-bufword'
-"Plug 'ncm2/ncm2-path'
-"Plug 'ncm2/ncm2-jedi'
-
 
 
 
@@ -108,14 +88,6 @@ Plug 'othree/yajs.vim'
 
 Plug 'roxma/nvim-yarp'
 
-"" enable ncm2 for all buffers
-"" IMPORTANT: :help Ncm2PopupOpen for more information
-"set completeopt=noinsert,menuone,noselect
-"" NOTE: you need to install completion sources to get completions. Check
-"" our wiki page for a list of sources: https://github.com/ncm2/ncm2/wiki
-"Plug 'ncm2/ncm2-bufword'
-"Plug 'ncm2/ncm2-path'
-"Plug 'ncm2/ncm2-cssomni'
 
 Plug 'Shougo/denite.nvim' " Magical search files in
 
@@ -156,6 +128,10 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'sjl/badwolf'
 Plug 'luochen1990/rainbow'
 Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'srcery-colors/srcery-vim'
+Plug 'nightsense/carbonized'
+Plug 'erichdongubler/vim-sublime-monokai'
+
 call plug#end()
 
 

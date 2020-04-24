@@ -43,9 +43,10 @@ set showmatch
 set enc=utf-8
 :set mouse=a
 
-
+"let g:black_virtualenv = $HOME . '/pyenv/shims'
 if has("nvim")
-    let g:python3_host_prog = $HOME . "/.pyenv/shims/python3.7"
+    let g:python3_host_prog = $HOME . "/.pyenv/versions/development_env/bin/python"
+
 endif
 
 let g:neomake_python_enabled_makers = ['flake8']
@@ -98,10 +99,37 @@ source ~/.config/nvim/denite.vim " all plugins
 
 " === Coc.nvim === "
 " use <tab> for trigger completion and navigate to next complete item
+
+set cmdheight=2
+set updatetime=300
+
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
+
+
+
+
+
+
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Or use `complete_info` if your vim support it, like:
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+
+
+
+
+
+
+
+
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
@@ -110,7 +138,6 @@ inoremap <silent><expr> <TAB>
 
 "Close preview window when completion is done.
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-
 
 
 
@@ -142,22 +169,22 @@ let g:deoplete#enable_at_startup = 1
 set termguicolors
 " Italics for my favorite color scheme
 let g:palenight_terminal_italics=1
-let g:material_theme_style = 'dark'
+"let g:gruvbox_contrast_dark = 'dark'
 set background=dark
-colorscheme palenight
+colorscheme onedark
+
 
 
 :set cursorline
 :hi clear CursorLine
 :hi CursorLine gui=bold
-highlight Cursorline cterm=bold gui=bold term=none guibg=Grey30
+highlight Cursorline cterm=none gui=none term=none guibg=Grey30
 
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 "                                      MISC
 "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 set statusline^=%{coc#status()}
-autocmd FileType python let b:coc_root_patterns = ['.git', '.env']
-    " Enable line numbers
+autocmd FileType python let b:coc_root_patterns = ['.env', '.venv', '.git']
 set number
 
 " Reload icons after init source

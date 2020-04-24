@@ -1,26 +1,27 @@
 {
-  "suggest.echodocSupport": true,
-  "suggest.maxCompleteItemCount": 20,
-  "coc.preferences.formatOnSaveFiletypes": [
-    "javascript",
-    "typescript",
-    "typescriptreact",
-    "json",
-    "javascriptreact",
-    "typescript.tsx"
-  ],
-  "eslint.filetypes": [
-    "javascript",
-    "typescript",
-    "typescriptreact",
-    "javascriptreact",
-    "typescript.tsx"
-  ],
-  "diagnostic.errorSign": "•",
-  "diagnostic.warningSign": "•",
-  "diagnostic.infoSign": "•",
-  "python.jediEnabled":false,
-  "python.autoComplete.addBrackets": true,
-  "suggest.floatEnable": true,
-  "coc.preferences.hoverTarget": "float"
+    "suggest.echodocSupport": true,
+    "suggest.maxCompleteItemCount": 20,
+    "coc.preferences.formatOnSaveFiletypes": [
+        "javascript",
+        "typescript",
+        "typescriptreact",
+        "json",
+        "javascriptreact",
+        "typescript.tsx",
+    ],
+    "eslint.filetypes": [
+        "javascript",
+        "typescript",
+        "typescriptreact",
+        "javascriptreact",
+        "typescript.tsx",
+    ],
+    "diagnostic.errorSign": "•",
+    "diagnostic.warningSign": "•",
+    "diagnostic.infoSign": "•",
+    "python.jediEnabled": false,
+    "python.jediPath": "/home/gabrielmenendez/.pyenv/versions/3.8.2/envs/development_env/lib/python3.8/site-packages",
+    "python.autoComplete.addBrackets": true,
+    "suggest.floatEnable": true,
+    "coc.preferences.hoverTarget": "float",
 }

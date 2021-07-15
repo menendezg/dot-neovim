@@ -1,103 +1,264 @@
-"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-"                                                                              "
-"                       __   _ _ _ __ ___  _ __ ___                            "
-"                       \ \ / / | '_ ` _ \| '__/ __|                           "
-"                        \ V /| | | | | | | | | (__                            "
-"                         \_/ |_|_| |_| |_|_|  \___|                           "
-"                                                                              "
-"                                                                              "
-"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"                              
-"                            MENENDEZ GABRIEL                                  "                        
-"                      CONFIGURATION FILE FOR NVIM                             "
-"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-scriptencoding utf-8
-source ~/.config/nvim/plugins.vim " all plugins
-"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.local/share/nvim/plugged')
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Remap leader key to ,
-let g:mapleader=','
+Plug 'projekt0n/github-nvim-theme'
+Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ervandew/supertab'
 
+"Plug 'davidhalter/jedi-vim'
+"Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 
+Plug 'nvie/vim-flake8'
+Plug 'sheerun/vim-polyglot'
 
-"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-"Common configurations. for python programming first
-"+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-"Turn off backup
-" Disable line numbers
-set nonumber
-set nobackup
-set noswapfile
-set nowritebackup
+Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-sensible'
+Plug 'itchyny/lightline.vim'
+Plug 'joshdick/onedark.vim'
+Plug 'ap/vim-buftabline'
+Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/nerdtree' 
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'scrooloose/syntastic'
+Plug 'majutsushi/tagbar'
+Plug 'vim-scripts/indentpython.vim'
+Plug 'lepture/vim-jinja'
+Plug 'pangloss/vim-javascript'
+Plug 'prettier/vim-prettier'
 
-syntax on
-set ruler
+" GIT plugins
+Plug 'zivyangll/git-blame.vim'
+Plug 'GlennLeo/cobalt2'
+Plug 'Rigellute/rigel'
+Plug 'wojciechkepka/vim-github-dark'
+Plug 'ryanoasis/vim-devicons'
+Plug 'lambdalisue/glyph-palette.vim'
+Plug 'morhetz/gruvbox'
+"Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+call plug#end()
 
-
-filetype plugin indent on
-set tabstop=4
-set shiftwidth=4
-set expandtab
-set autoindent
-set cursorline
-set showmatch
-set enc=utf-8
-:set mouse=a
-
-"let g:black_virtualenv = $HOME . '/pyenv/shims'
 if has("nvim")
-    let g:python3_host_prog = $HOME . "/.pyenv/versions/development_env/bin/python"
-
+    let g:python3_host_prog = $HOME . "/.pyenv/versions/test_dev_env/bin/python3"
 endif
 
+ filetype plugin indent on
+let python_highlight_all=1
+syntax on
+" always show the status bar
+set laststatus=2
+
+" enable 256 colors
+"set t_Co=256
+"set t_ut=
+
+" turn on line numbering
+set number
+
+" sane text files
+set fileformat=unix
+set encoding=utf-8
+set fileencoding=utf-8
+
+" sane editing
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set colorcolumn=80
+set expandtab
+"set viminfo='25,\"50,n~/.viminfo
+
+
+set nobackup
+set nowritebackup
+set noswapfile
+
+
+" word movement
+imap <S-Left> <Esc>bi
+nmap <S-Left> b
+imap <S-Right> <Esc><Right>wi
+nmap <S-Right> w
+
+" indent/unindent with tab/shift-tab
+nmap <Tab> >>
+imap <S-Tab> <Esc><<i
+nmap <S-tab> <<
 let g:neomake_python_enabled_makers = ['flake8']
-let g:jedi#use_splits_not_buffers = "right" "when we go to definition.
-
-"noremap <F3> :Autoformat<CR> key IMPORTANT: deprecated ATM
-
-"let g:autoformat_autoindent = 0
-let g:autoformat_retab = 0
-let g:autoformat_remove_trailing_spaces = 0
-set textwidth=88
-set colorcolumn=88
-let g:one_allow_italics = 1 " I love italic for comments
 
 
+" mouse
+set mouse=a
+let g:is_mouse_enabled = 1
+noremap <silent> <Leader>m :call ToggleMouse()<CR>
+function ToggleMouse()
+    ifg:is_mouse_enabled == 1
+        echo "Mouse OFF"
+        set mouse=
+        let g:is_mouse_enabled = 0
+    else
+        echo "Mouse ON"
+        set mouse=a
+        let g:is_mouse_enabled = 1
+    endif
+endfunction
 
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
+" color scheme
+"syntax on
+colorscheme gruvbox
+"""" enable 24bit true color
+"set t_Co=256
+"set termguicolors
+
+set termguicolors
+"""" enable the theme
+syntax enable
+set background=dark
+"colorscheme onedark
+
+" set Vim-specific sequences for RGB colors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 
-vmap <C-c> "+y 
+filetype on
+filetype plugin indent on
+
+" lightline
+set noshowmode
+"let g:lightline = { 'colorscheme': 'onedark' }
+let g:rigel_airline = 1
+let g:airline_theme = 'ghdark'
+
+" code folding
+set foldmethod=indent
+set foldlevel=99
+
+" wrap toggle
+setlocal nowrap
+noremap <silent> <Leader>w :call ToggleWrap()<CR>
+function ToggleWrap()
+    if &wrap
+        echo "Wrap OFF"
+        setlocal nowrap
+        set virtualedit=all
+        silent! nunmap <buffer> <Up>
+        silent! nunmap <buffer> <Down>
+        silent! nunmap <buffer> <Home>
+        silent! nunmap <buffer> <End>
+        silent! iunmap <buffer> <Up>
+        silent! iunmap <buffer> <Down>
+        silent! iunmap <buffer> <Home>
+        silent! iunmap <buffer> <End>
+    else
+        echo "Wrap ON"
+        setlocal wrap linebreak nolist
+        set virtualedit=
+        setlocal display+=lastline
+        noremap  <buffer> <silent> <Up>   gk
+        noremap  <buffer> <silent> <Down> gj
+        noremap  <buffer> <silent> <Home> g<Home>
+        noremap  <buffer> <silent> <End>  g<End>
+        inoremap <buffer> <silent> <Up>   <C-o>gk
+        inoremap <buffer> <silent> <Down> <C-o>gj
+        inoremap <buffer> <silent> <Home> <C-o>g<Home>
+        inoremap <buffer> <silent> <End>  <C-o>g<End>
+    endif
+endfunction
+
+" move through split windows
+nmap <leader><Up> :wincmd k<CR>
+nmap <leader><Down> :wincmd j<CR>
+nmap <leader><Left> :wincmd h<CR>
+nmap <leader><Right> :wincmd l<CR>
+
+" move through buffers
+nmap <leader>[ :bp!<CR>
+nmap <leader>] :bn!<CR>
+nmap <leader>x :bd<CR>
+
+" restore place in file from previous session
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" file browser
+let NERDTreeIgnore = ['\.pyc$', '__pycache__']
+let NERDTreeMinimalUI = 1
+let g:nerdtree_open = 0
+map <leader>n :call NERDTreeToggle()<CR>
+function NERDTreeToggle()
+    NERDTreeTabsToggle
+    if g:nerdtree_open == 1
+        let g:nerdtree_open = 0
+    else
+        let g:nerdtree_open = 1
+        wincmd p
+    endif
+endfunction
+
+" syntastic
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 0
+"let g:syntastic_check_on_wq = 0
+"map <leader>s :SyntasticCheck<CR>
+"map <leader>d :SyntasticReset<CR>
+"map <leader>e :lnext<CR>
+"map <leader>r :lprev<CR>
+
+" tag list
+map <leader>t :TagbarToggle<CR>
+
+" copy, cut and paste
+vmap <C-c> "+y
+vmap <C-x> "+c
+vmap <C-v> c<ESC>"+p
+imap <C-v> <ESC>"+pa
+
+" disable autoindent when pasting text
+" source: https://coderwall.com/p/if9mda/automatically-set-paste-mode-in-vim-when-pasting-in-insert-mode
+let &t_SI .= "\<Esc>[?2004h"
+let &t_EI .= "\<Esc>[?2004l"
+
+function! XTermPasteBegin()
+    set pastetoggle=<Esc>[201~
+    set paste
+    return ""
+endfunction
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
+"let g:jedi#usages_command = "<leader>z"
+"let g:jedi#popup_on_dot = 0
+"let g:jedi#popup_select_first = 0
+"let g:jedi#use_tabs_not_buffers = 1
 
 
-"
-"
-" jedi
-let g:jedi#goto_command = "gc"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = "gf"
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#use_splits_not_buffers = "right"
-let g:pymode_virtualenv=1
-let g:python_highlight_all = 1
+" testing features
+"let g:jedi#goto_command = "<leader>d"
+"let g:jedi#goto_assignments_command = "<leader>g"
+"let g:jedi#goto_stubs_command = "<leader>s"
+"let g:jedi#goto_definitions_command = ""
+"let g:jedi#documentation_command = "K"
+"let g:jedi#usages_command = "<leader>n"
+"let g:jedi#completions_command = "<C-Space>"
+"let g:jedi#rename_command = "<leader>r"
+"let g:jedi#popup_on_dot = 1
 
 
-source ~/.config/nvim/NERDTree_settings.vim "LOAD nerd tree settings
-
-"AWESOME ULTRA MAGIC REGULAR REGEX for highlight methods
 au BufReadPost,BufNewFile *.py syntax match pythonFunction /\v([^[:cntrl:][:space:][:punct:][:digit:]]|_)([^[:cntrl:][:punct:][:space:]]|_)*\ze(\s?\()/
+" Disable because I have flake 8 in the ncoc
+"autocmd BufWritePost *.py call flake8#Flake8()
 
-"" Run always when a python file is write
-autocmd BufWritePost *.py call flake8#Flake8()
+"YCM CONFIG
+"let g:ycm_autoclose_preview_window_after_completion=1
+"map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 
-source ~/.config/nvim/denite.vim " all plugins
 
-
-" === Coc.nvim === "
+" VIM coc configs 
 " use <tab> for trigger completion and navigate to next complete item
 
 set cmdheight=2
@@ -154,68 +315,16 @@ nmap <silent> <leader>dr <Plug>(coc-references)
 nmap <silent> <leader>dj <Plug>(coc-implementation)
 
 " FINAL COC CONFIS
+"
+" Config for Git BLAME
+nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
 
-
-
-
-
-"EMMET CONFIG 
-let g:user_emmet_leader_key=','
-let g:deoplete#enable_at_startup = 1
-
-
-
-" UI SETTINGS
-set termguicolors
-" Italics for my favorite color scheme
-let g:palenight_terminal_italics=1
-"let g:gruvbox_contrast_dark = 'dark'
-set background=dark
-colorscheme onedark
-
-
-
-:set cursorline
-:hi clear CursorLine
-:hi CursorLine gui=bold
-highlight Cursorline cterm=none gui=none term=none guibg=Grey30
-
-"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-"                                      MISC
-"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-set statusline^=%{coc#status()}
-autocmd FileType python let b:coc_root_patterns = ['.env', '.venv', '.git']
-set number
-
-" Reload icons after init source
-if exists('g:loaded_webdevicons')
-  call webdevicons#refresh()
-endif
-"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-"Enable prettier
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
-noremap <leader>f :Prettier<CR> "set keys to executte command
-
-
-"black congiration map and execute when allways save file
-noremap <leader>p :Black<CR> "set keys to executte command
-autocmd BufWritePre *.py execute ':Black'
-autocmd BufWritePre *.py execute ':Isort'
-
-
-" enable the magic of tabs line in neovim
-let g:airline#extensions#tabline#enabled = 1
-"testing transparent background
-"hi! Normal ctermbg=NONE guibg=NONE
-"let g:indentLine_setColors = 0  
-let g:rainbow#max_level = 16
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-
-augroup rainbow_lisp
-  autocmd!
-  autocmd FileType javascript,jsx,python,lisp,clojure,scheme RainbowParentheses
+let g:Tlist_Ctags_Cmd='/usr/local/Homebrew/Cellar/ctags/5.8_2/'
+let g:rigel_lightline = 1
+let g:lightline = { 'colorscheme': 'onedark' }
+augroup my-glyph-palette
+  autocmd! *
+  autocmd FileType fern call glyph_palette#apply()
+  autocmd FileType nerdtree,startify call glyph_palette#apply()
 augroup END
 
-" List of colors that you do not want. ANSI code or #RRGGBB
-"let g:rainbow#blacklist = [233, 234, 73, 30, 96, 214, 167, 107, 172, 50, 215, '#c792ea', '#ff5370',  202,]

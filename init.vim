@@ -1,16 +1,44 @@
+" final version of my editor " 
+" neovim
+"
+"
+" NVIM v0.4.3
+" Build type: Release
+" LuaJIT 2.0.5
+
+" why neovim: insert why here 
+"
+"
+" memory commands 
+" zc = fold 
+" zo = open 
+" leader -s = git blame 
+" :bd -> close the file 
+" leader F -> run black machiato which run black for only selected lines
+"
+"
+
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
+Plug 'psf/black', { 'branch': 'stable' }
+Plug 'smbl64/vim-black-macchiato'
 Plug 'projekt0n/github-nvim-theme'
+
+
+
+Plug 'brentyi/isort.vim'
+Plug 'nvie/vim-flake8'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 "Plug 'ervandew/supertab'
 
 "Plug 'davidhalter/jedi-vim'
 "Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-
+Plug 'Yggdroot/indentLine' 
 Plug 'nvie/vim-flake8'
 Plug 'sheerun/vim-polyglot'
 
@@ -38,11 +66,30 @@ Plug 'wojciechkepka/vim-github-dark'
 Plug 'ryanoasis/vim-devicons'
 Plug 'lambdalisue/glyph-palette.vim'
 Plug 'morhetz/gruvbox'
-"Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'tmhedberg/simpylfold'
+Plug 'junegunn/seoul256.vim'
+Plug 'mileszs/ack.vim'
+Plug 'scheakur/vim-scheakur'
+Plug 'jonathanfilip/vim-lucius'
+Plug 'doums/darcula'
+Plug 'bratpeki/truedark-vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'vimwiki/vimwiki'
+Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+Plug 'tanvirtin/monokai.nvim'
+Plug 'tomasr/molokai'
+Plug 'chriskempson/tomorrow-theme'
+Plug 'sainnhe/sonokai'
+Plug 'numirias/semshi'
+Plug 'chiendo97/intellij.vim'
+Plug 'overcache/NeoSolarized'
+
 call plug#end()
 
 if has("nvim")
-    let g:python3_host_prog = $HOME . "/.pyenv/versions/test_dev_env/bin/python3"
+    let g:python3_host_prog = $HOME . "/.pyenv/versions/3.8.5/bin/python3"
 endif
 
  filetype plugin indent on
@@ -67,7 +114,7 @@ set fileencoding=utf-8
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-set colorcolumn=80
+set colorcolumn=88
 set expandtab
 "set viminfo='25,\"50,n~/.viminfo
 
@@ -106,18 +153,38 @@ function ToggleMouse()
     endif
 endfunction
 
+set termguicolors
 " color scheme
-"syntax on
-colorscheme gruvbox
+syntax on
 """" enable 24bit true color
 "set t_Co=256
 "set termguicolors
 
-set termguicolors
 """" enable the theme
 syntax enable
 set background=dark
-"colorscheme onedark
+let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default': {
+  \       'transparent_background':0,
+  \       'allow_bold':1,
+  \     }
+  \  },
+  \   'language': {
+  \     'python': {
+  \       'highlight_builtins' : 1
+  \     },
+  \     'cpp': {
+  \       'highlight_standard_library': 1
+  \     },
+  \     'c': {
+  \       'highlight_builtins' : 1
+  \     }
+  \   }
+  \ }
+
+colorscheme PaperColor
+"colorscheme onedar
 
 " set Vim-specific sequences for RGB colors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -130,8 +197,6 @@ filetype plugin indent on
 " lightline
 set noshowmode
 "let g:lightline = { 'colorscheme': 'onedark' }
-let g:rigel_airline = 1
-let g:airline_theme = 'ghdark'
 
 " code folding
 set foldmethod=indent
@@ -250,7 +315,7 @@ inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
 au BufReadPost,BufNewFile *.py syntax match pythonFunction /\v([^[:cntrl:][:space:][:punct:][:digit:]]|_)([^[:cntrl:][:punct:][:space:]]|_)*\ze(\s?\()/
 " Disable because I have flake 8 in the ncoc
-"autocmd BufWritePost *.py call flake8#Flake8()
+autocmd BufWritePost *.py call flake8#Flake8()
 
 "YCM CONFIG
 "let g:ycm_autoclose_preview_window_after_completion=1
@@ -321,10 +386,34 @@ nnoremap <Leader>s :<C-u>call gitblame#echo()<CR>
 
 let g:Tlist_Ctags_Cmd='/usr/local/Homebrew/Cellar/ctags/5.8_2/'
 let g:rigel_lightline = 1
-let g:lightline = { 'colorscheme': 'onedark' }
+let g:lightline = { 'colorscheme': 'PaperColor' }
 augroup my-glyph-palette
   autocmd! *
   autocmd FileType fern call glyph_palette#apply()
   autocmd FileType nerdtree,startify call glyph_palette#apply()
 augroup END
 
+
+nnoremap <silent> <C-f> :Files<CR>
+
+" Plug macchiato config 
+autocmd FileType python xmap <buffer> <Leader>f <plug>(BlackMacchiatoSelection)
+autocmd FileType python nmap <buffer> <Leader>f <plug>(BlackMacchiatoCurrentLine)
+nnoremap  <s-f> :Ag<cr>
+
+" config for task list warrior 
+"let g:vimwiki_list = [{'path': '/tmp/vimwiki', 'syntax':'markdown', 'ext': '.md'}]
+"let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+
+let g:taskwiki_markup_syntax = 'markdown'
+
+let g:mardown_folding = 1
+
+""" config color for headers for wiki
+:hi VimwikiHeader1 guifg=#fcc844
+:hi VimwikiHeader2 guifg=#2fd65c
+:hi VimwikiHeader3 guifg=#2fd6d1
+
+
+" save file with leader key 
+noremap <Leader>s :update<CR>
